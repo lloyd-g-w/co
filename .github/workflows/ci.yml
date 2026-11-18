@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Install JS dependencies
+        run: nix develop -c pnpm install --frozen-lockfile
+      - name: Check
+        run: nix develop -c just check
+      - name: Test
+        run: nix develop -c just test
+      - name: Protocol types are up to date
+        run: |
+          nix develop -c just codegen
+          git diff --exit-code packages/protocol/src/generated

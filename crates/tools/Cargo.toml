@@ -1,0 +1,15 @@
+[package]
+name = "co-tools"
+description = "Tool definitions and their implementations (bash, read, write, edit, ls, grep, find), run on a host"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+
+[lints]
+workspace = true

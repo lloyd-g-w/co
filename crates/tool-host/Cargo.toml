@@ -1,0 +1,19 @@
+[package]
+name = "co-tool-host"
+description = "Tool host: connects a machine to the co server and runs tools there"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+co-protocol.workspace = true
+co-tools.workspace = true
+co-client.workspace = true
+dirs.workspace = true
+uuid.workspace = true
+anyhow.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+
+[lints]
+workspace = true

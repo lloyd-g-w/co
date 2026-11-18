@@ -1,0 +1,23 @@
+[package]
+name = "co-server"
+description = "The co server: HTTP/WebSocket API, auth, clients, sessions and hosts"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+co-protocol.workspace = true
+co-store.workspace = true
+co-hosts.workspace = true
+co-agent.workspace = true
+axum.workspace = true
+tower-http.workspace = true
+serde_json.workspace = true
+uuid.workspace = true
+futures.workspace = true
+anyhow.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+
+[lints]
+workspace = true

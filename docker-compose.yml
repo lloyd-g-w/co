@@ -1,0 +1,20 @@
+# Development database. `just db` starts it; `just db-reset` wipes it.
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: co
+      POSTGRES_PASSWORD: co
+      POSTGRES_DB: co
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - co-postgres:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U co -d co"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+volumes:
+  co-postgres:

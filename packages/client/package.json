@@ -1,0 +1,21 @@
+{
+  "name": "@co/client",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Typed WebSocket client for the co server.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p .",
+    "test": "vp test run --passWithNoTests"
+  },
+  "dependencies": {
+    "@co/protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  }
+}

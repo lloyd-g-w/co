@@ -1,0 +1,77 @@
+[workspace]
+resolver = "3"
+members = [
+  "crates/*",
+  "apps/cli",
+  "apps/tui",
+  "apps/desktop/src-tauri",
+]
+# The desktop app needs the platform webview libraries (webkitgtk on Linux):
+# build it through `just desktop` / `pnpm --filter @co/desktop build`.
+default-members = [
+  "crates/*",
+  "apps/cli",
+  "apps/tui",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+license = "MIT"
+repository = "https://github.com/lloyd-g-w/co"
+
+[workspace.dependencies]
+# Internal crates
+co-protocol = { path = "crates/protocol" }
+co-store = { path = "crates/store" }
+co-tools = { path = "crates/tools" }
+co-hosts = { path = "crates/hosts" }
+co-providers = { path = "crates/providers" }
+co-agent = { path = "crates/agent" }
+co-server = { path = "crates/server" }
+co-tool-host = { path = "crates/tool-host" }
+co-client = { path = "crates/client" }
+co-tui = { path = "apps/tui" }
+
+# Runtime, errors, logging
+tokio = { version = "1.54", features = ["full"] }
+futures = "0.3.34"
+anyhow = "1.0.104"
+thiserror = "2.0.21"
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter", "fmt"] }
+
+# Data
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+uuid = { version = "1.29", features = ["v4", "v7", "serde"] }
+time = { version = "0.3.55", features = ["serde"] }
+ts-rs = { version = "12.0.1", features = ["serde-json-impl", "uuid-impl"] }
+
+# Server
+axum = { version = "0.8.9", features = ["ws"] }
+tower-http = { version = "0.7.1", features = ["trace", "cors"] }
+sqlx = { version = "0.9.1", default-features = false, features = ["runtime-tokio", "tls-rustls", "postgres", "macros", "migrate", "uuid", "time", "json"] }
+argon2 = "0.6.0"
+
+# Clients
+tokio-tungstenite = { version = "0.30.0", features = ["rustls-tls-webpki-roots"] }
+reqwest = { version = "0.13.5", default-features = false, features = ["json", "stream", "rustls"] }
+
+# CLI / TUI
+clap = { version = "4.6.8", features = ["derive", "env"] }
+ratatui = "0.30.2"
+crossterm = { version = "0.29.0", features = ["event-stream"] }
+dirs = "7.0.0"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+
+[profile.release]
+codegen-units = 1
+lto = true
+strip = true

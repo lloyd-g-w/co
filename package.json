@@ -1,0 +1,29 @@
+{
+  "name": "co",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev:web": "pnpm --filter @co/web dev",
+    "dev:desktop": "pnpm --filter @co/desktop dev",
+    "build": "pnpm --filter @co/web build",
+    "build:desktop": "pnpm --filter @co/desktop build",
+    "typecheck": "pnpm -r typecheck",
+    "check": "vp check",
+    "lint": "vp lint",
+    "fmt": "vp fmt",
+    "fmt:check": "vp fmt --check",
+    "test": "vp test run --passWithNoTests",
+    "codegen": "cargo test -p co-protocol export_bindings",
+    "postinstall": "bash scripts/nixos-patch-node-bins.sh"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "concurrently": "10.0.7",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@12.9.0"
+}
